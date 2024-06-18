@@ -32,8 +32,6 @@ const Home = () => {
         setSelectedShowTime(time);
     };
 
-    console.log(selectedShowTime)
-
     return (
         <div className='h-full w-auto bg-black'>
             {/* Navbar Section */}

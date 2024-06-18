@@ -46,7 +46,7 @@ const MovieSeats = () => {
         .filter(seat => seat !== null);
 
     return (
-        <div className="flex flex-col items-center w-full bg-black h-screen">
+        <div className="flex flex-col items-center w-full bg-black min-h-screen">
             <div className="bg-zinc-800 h-[10%] shadow-white shadow-md text-white font-bold py-2 w-full mb-12 text-center flex items-center justify-center text-xl">SCREEN</div>
             <div className="flex flex-shrink-0 items-center justify-center p-4 bg-black lg:min-w-1/2">
                 <div className="flex flex-col gap-2 items-center">

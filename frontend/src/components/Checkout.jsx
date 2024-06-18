@@ -4,6 +4,7 @@ import { useFetch } from '../script/useFetch';
 import TicketCounter from './TicketCounter';
 import Navbar from './Navbar';
 import { formatTime, getFullShowTime } from '../script/formatDate';
+import LoadingSpinner from './LoadingSpinner'; // Assuming you have a LoadingSpinner component
 
 const Checkout = () => {
     // Navigate
@@ -12,12 +13,12 @@ const Checkout = () => {
     // Retrieve the state from the previous page
     const location = useLocation();
     let selectedSeats, movie, selectedDate, selectedHallType, selectedShowTime, showtime;
-    if(location.state) {
+    if (location.state) {
         ({ selectedSeats, movie, selectedDate, selectedHallType, selectedShowTime, showtime } = location.state);
     }
 
     // Fetch ticket price based on the selected hall type
-    const { data: ticketprice, error } = useFetch('http://localhost/Chagee%20Cinema/backend/fetchTicketPrice.php?')
+    const { data: ticketprice, error } = useFetch('http://localhost/Chagee%20Cinema/backend/fetchTicketPrice.php');
 
     // Track the ticket number
     const [adultTickets, setAdultTickets] = useState(0);
@@ -26,9 +27,10 @@ const Checkout = () => {
 
     // Get price for specific audience type
     const getTicketPrice = (audienceType, hallType) => {
+        if (!ticketprice) return 0;
         const price = ticketprice.find(price => price.audienceType === audienceType && price.hallType === hallType);
         return price ? price.price : 0;
-    }
+    };
 
     // Set the ticket price for each category
     const adultPrice = getTicketPrice('Adult', selectedHallType);
@@ -41,7 +43,7 @@ const Checkout = () => {
     // Check if the total tickets exceed the selected seats
     useEffect(() => {
         const totalTickets = adultTickets + childrenTickets + studentTickets;
-        if(totalTickets > selectedSeats.length) {
+        if (totalTickets > selectedSeats.length) {
             alert('You have selected more tickets than seats');
             setAdultTickets(0);
             setChildrenTickets(0);
@@ -51,19 +53,20 @@ const Checkout = () => {
 
     // Prepare the ticket counts to be passed to the next route
     const ticketCounts = [
-        {
-            type: 'Adult',
-            count: adultTickets > 0 ? adultTickets : 0,
-        },
-        {
-            type: 'Children',
-            count: childrenTickets > 0 ? childrenTickets : 0,
-        },
-        {
-            type: 'Student',
-            count: studentTickets > 0 ? studentTickets : 0,
-        },
+        { type: 'Adult', count: adultTickets > 0 ? adultTickets : 0 },
+        { type: 'Children', count: childrenTickets > 0 ? childrenTickets : 0 },
+        { type: 'Student', count: studentTickets > 0 ? studentTickets : 0 },
     ];
+
+    // Display loading spinner if data is not available yet
+    if (!ticketprice) {
+        return <LoadingSpinner />;
+    }
+
+    // Display error message if fetching ticket prices fails
+    if (error) {
+        return <div>Error loading ticket prices: {error}</div>;
+    }
 
     return (
         <div className='h-screen flex flex-col bg-black'>
@@ -78,21 +81,15 @@ const Checkout = () => {
                     </div>
                     <div className='flex flex-col justify-evenly h-2/3'>
                         <p className='flex items-center gap-2'>
-                            <span class="material-symbols-outlined">
-                                pin_drop
-                            </span> 
+                            <span className="material-symbols-outlined">pin_drop</span> 
                             {showtime?.state} - {showtime?.locationName}
                         </p>
                         <p className='flex items-center gap-2'>
-                            <span class="material-symbols-outlined">
-                                camera_outdoor
-                            </span>
+                            <span className="material-symbols-outlined">camera_outdoor</span>
                             Hall {showtime?.hallID}
                         </p>
                         <p className='flex items-center gap-2'>
-                            <span class="material-symbols-outlined">
-                                date_range
-                            </span>
+                            <span className="material-symbols-outlined">date_range</span>
                             {selectedDate && getFullShowTime(selectedDate)}, 
                             {selectedShowTime && formatTime(selectedShowTime)}
                         </p>
@@ -134,7 +131,7 @@ const Checkout = () => {
                         className='bg-yellow-300 w-1/3 py-2 rounded-lg font-bold hover:scale-105 transition-all duration-100 mt-1'
                         onClick={() => navigate('/payment/confirmation',
                             {
-                                state:{
+                                state: {
                                     selectedSeats,
                                     movie,
                                     selectedDate,
@@ -153,6 +150,6 @@ const Checkout = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Checkout;

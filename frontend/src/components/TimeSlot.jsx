@@ -2,9 +2,6 @@ import { formatTime } from "../script/formatDate"
 
 const TimeSlot = ({time, type, selected}) => {
   const isSelected = time === selected;
-
-  console.log(time)
-  console.log(selected)
   
   return (
     <div className={`${isSelected ? 'border-yellow-300 bg-yellow-300' : ''} border-[2px] flex flex-col items-center justify-center px-12 py-4 cursor-pointer rounded-xl hover:bg-yellow-300 hover:border-yellow-300 group`}>

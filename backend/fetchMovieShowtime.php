@@ -21,7 +21,10 @@
     JOIN 
         location l ON ms.locationID = l.locationID
     JOIN 
-        movie m ON ms.movieID = m.movieID";
+        movie m ON ms.movieID = m.movieID
+    ORDER BY
+        ms.showtimeDate ASC
+    ";
 
     $stmt = $conn->prepare($sql);
 
