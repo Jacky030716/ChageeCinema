@@ -1,16 +1,32 @@
 import { useNavigate } from 'react-router-dom';
 import { formatTime, getFullShowTime } from '../script/formatDate';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchSessionData } from '../script/fetchSessionData';
 
 const MovieModalBox = ({ movie, selectedDate, selectedHallType, selectedShowTime, showtime }) => {
     const [showModal, setShowModal] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     const navigate = useNavigate();
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        const getSessionData = async () => {
+            const result = await fetchSessionData();
+            if (result.success) {
+                setUserData(result.data);
+            }
+        };
+    
+        getSessionData();
+    }, []);
 
     return (
         <>
             <div className='flex justify-center'>
                 <button
-                    className="bg-yellow-300 text-black hover:bg-yellow-200 hover:scale-110 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none mr-1 mb-4 ease-linear transition-all duration-150 w-1/4"
+                    className="bg-yellow-300 text-black hover:bg-yellow-200 hover:scale-110 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none mr-1 mb-4 ease-linear transition-all duration-150 lg:w-1/4 w-1/2"
                     type="button"
                     onClick={() => setShowModal(true)}
                 >
@@ -66,7 +82,17 @@ const MovieModalBox = ({ movie, selectedDate, selectedHallType, selectedShowTime
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                                     <button
                                         className="bg-yellow-300 text-black active:bg-yellow-300 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
-                                        onClick={() => navigate('/seat', { state: { movie, selectedDate, selectedHallType, selectedShowTime, showtime }})}
+                                        onClick={() => {
+                                            if (userData === null) {
+                                                setModalIsOpen(true);
+                                                setTimeout(() => {
+                                                    setModalIsOpen(false);
+                                                    navigate('/login');
+                                                },1500);
+                                            } else {
+                                                navigate('/seat', { state: { movie, selectedDate, selectedHallType, selectedShowTime, showtime }});
+                                            }
+                                        }}
                                     >
                                         Select Seats
                                     </button>
@@ -75,6 +101,14 @@ const MovieModalBox = ({ movie, selectedDate, selectedHallType, selectedShowTime
                         </div>
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    {modalIsOpen && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                            <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                                <h2 className="text-2xl font-bold mb-4">You haven't login yet!</h2>
+                                <p className="text-lg">You will be redirected to the login page shortly.</p>
+                            </div>
+                        </div>
+                    )}
                 </>
             ) : null}
         </>

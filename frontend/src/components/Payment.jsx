@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchSessionData } from "../script/fetchSessionData";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { formatTime, getFullShowTime } from "../script/formatDate";
@@ -18,6 +19,19 @@ const Payment = () => {
     } = location.state;
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [userData, setUserData] = useState(null);
+
+    // Fetch user session data
+    useEffect(() => {
+        const getSessionData = async () => {
+            const result = await fetchSessionData();
+            if (result.success) {
+                setUserData(result.data);
+            }
+        };
+    
+        getSessionData();
+    }, []);
 
     // Make booking request to backend using async and await
     const makeBooking = async (bookingData) => {
@@ -34,13 +48,20 @@ const Payment = () => {
 
     // Handle payment and exception handling
     const handlePayment = async () => {
+        // Check if session data has been fetched
+        if (!userData) {
+            return;
+        }
+
         const bookingData = {
             showID: showtime.showID,
             hallID: showtime.hallID,
             locationID: showtime.locationID,
             seatNumber: selectedSeats.join(', '),
             movieID: movie.movieID,
-            totalPrice
+            userID: userData.userID,
+            totalPrice,
+            
         };
     
         try {
@@ -62,7 +83,7 @@ const Payment = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar userdata={userData}/>
             <div className="flex flex-col gap-8 w-full bg-black h-screen px-12 py-28">
                 <div className="flex gap-8">
                     <div>

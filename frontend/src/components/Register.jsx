@@ -29,8 +29,44 @@ const [isDate, setIsDate] = useState(false)
 const [value, setValue] = useState(new Date())
 const [selectedOption, setSelectedOption] = useState("")
 
+const [modalIsOpen, setModalIsOpen] = useState(false)
+
 const calendarRef = useRef()
 const [isFormValid, setIsFormValid] = useState(false);
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target); // Collect all form fields
+
+    try {
+        const response = await fetch("http://localhost/Chagee%20Cinema/backend/register.php", {
+            method: "POST",
+            headers: {
+                // Ensure correct Content-Type for form data
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams(formData).toString(), // Convert FormData to URLSearchParams
+            credentials: "include" // Required for sending cookies
+        });
+
+        const data = await response.text();
+
+        console.log(data);
+
+        if (data.includes("New user created successfully")) {
+            setModalIsOpen(true);
+            setTimeout(() => {
+                setModalIsOpen(false);
+                window.location.href = "/login"; 
+            }, 2000);
+        }
+    } catch (error) {
+        console.error("Error occurred:", error);
+        // Handle any unexpected errors, e.g., network issues or server errors
+    }
+};
+
 
 const handleContactNumChange = (e) => {
     setIsContactNumValid(validateNumber(e.target.value))
@@ -100,9 +136,9 @@ return (
 
             {/* Register Form */}
             <h2 className="text-white font-bold text-2xl mb-1">Sign Up</h2>
-            <p className="text-gray-500 mb-8">Already a member?<a className="text-yellow-300 underline ml-2" href="#">Log In Now</a></p>
+            <p className="text-gray-500 mb-8">Already a member?<a className="text-yellow-300 underline ml-2" href="/login">Log In Now</a></p>
             <div className="flex flex-col h-3/5 overflow-y-auto pr-4">
-                <form action="http://localhost/Chagee%20Cinema/backend/register.php" method="POST">
+                <form onSubmit={handleSubmit}>
                     {/* Full Name */}
                     <div className="mb-6">2
                         <label htmlFor="name" className="text-gray-500">Full Name</label><br />
@@ -230,6 +266,14 @@ return (
                     />
                 </form>
             </div>
+            {modalIsOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                        <h2 className="text-2xl font-bold mb-4">New Account Created Successful!</h2>
+                        <p className="text-lg">You will be redirected to the login page shortly.</p>
+                    </div>
+                </div>
+            )}
         </div>
 
         {/* Image */}

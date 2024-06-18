@@ -14,11 +14,12 @@
         $locationID = $conn->real_escape_string($json_data['locationID']);
         $seatNumber = $conn->real_escape_string($json_data['seatNumber']);
         $movieID = intval($json_data['movieID']);
+        $userID = $conn->real_escape_string($json_data['userID']);
         $totalPrice = floatval($json_data['totalPrice']);
-
+        
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO booking (bookingID, showID, hallID, locationID, seatNumber, movieID, totalPrice) VALUES (UUID(), ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssdi", $showID, $hallID, $locationID, $seatNumber, $movieID, $totalPrice);
+        $stmt = $conn->prepare("INSERT INTO booking (bookingID, showID, hallID, locationID, seatNumber, movieID, userID, totalPrice) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssdsi", $showID, $hallID, $locationID, $seatNumber, $movieID, $userID, $totalPrice);
 
         // Execute
         if($stmt->execute()) {

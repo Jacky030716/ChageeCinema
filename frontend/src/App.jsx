@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import MovieSeats from './components/MovieSeats'
 import Checkout from './components/Checkout'
 import Payment from './components/Payment'
-import MyTickets from './components/MyTickets'
+import MyProfile from './components/MyProfile'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path='/seat' element={<MovieSeats />} />
           <Route path='/payment' element={<Checkout />} />
           <Route path='/payment/confirmation' element={<Payment />} />
-          <Route path='/mytickets' element={<MyTickets />} />
+          <Route path='/profile/*' element={<MyProfile />} />
       </Routes>
     </Router>
     

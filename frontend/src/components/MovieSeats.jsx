@@ -19,7 +19,7 @@ const MovieSeats = () => {
             {seats.slice(start, end).map((seat, index) => (
                 <button
                     key={index + start}
-                    className={`w-10 h-10 rounded-full ${
+                    className={`lg:w-10 lg:h-10 w-8 h-8 rounded-full lg:text-lg text-xs ${
                         seat === 'available'
                             ? 'bg-white'
                             : seat === 'selected'
@@ -48,10 +48,10 @@ const MovieSeats = () => {
     return (
         <div className="flex flex-col items-center w-full bg-black h-screen">
             <div className="bg-zinc-800 h-[10%] shadow-white shadow-md text-white font-bold py-2 w-full mb-12 text-center flex items-center justify-center text-xl">SCREEN</div>
-            <div className="flex items-center justify-center p-4 bg-black w-1/2">
-                <div className="flex flex-col gap-2 items-center w-4/5">
+            <div className="flex flex-shrink-0 items-center justify-center p-4 bg-black lg:min-w-1/2">
+                <div className="flex flex-col gap-2 items-center">
                     {[...Array(5)].map((_, rowIndex) => (
-                        <div key={rowIndex} className='flex items-center gap-4 w-full'>
+                        <div key={rowIndex} className='flex items-center gap-6 w-full'>
                             <div className='basis-1/5'>{renderSeats(rowIndex * 10, rowIndex * 10 + 2, String.fromCharCode(65 + rowIndex))}</div>
                             <div className='basis-3/5'>{renderSeats(rowIndex * 10 + 2, rowIndex * 10 + 8, String.fromCharCode(65 + rowIndex))}</div>
                             <div className='basis-1/5'>{renderSeats(rowIndex * 10 + 8, rowIndex * 10 + 10, String.fromCharCode(65 + rowIndex))}</div>
@@ -71,32 +71,41 @@ const MovieSeats = () => {
             )}
             <div className='flex items-center justify-center gap-6 mt-8 w-1/2'>
                 <div className='border-2 border-gray-400 px-6 py-2 flex items-center gap-3 shadow-gray-500 shadow-md rounded-md cursor-pointer'>
-                    <div className='rounded-full bg-yellow-300 w-6 h-6'></div>
-                    <span className='text-gray-300'>Selected</span>
+                    <div className='rounded-full bg-yellow-300 lg:w-6 lg:h-6 w-4 h-4'></div>
+                    <span className='text-gray-300 lg:text-md text-sm'>Selected</span>
                 </div>
                 <div className='border-2 border-gray-400 px-6 py-2 flex items-center gap-3 shadow-gray-500 shadow-md rounded-md cursor-pointer'>
-                    <div className='rounded-full bg-white w-6 h-6'></div>
-                    <span className='text-gray-300'>Available</span>
+                    <div className='rounded-full bg-white lg:w-6 lg:h-6 w-4 h-4'></div>
+                    <span className='text-gray-300 lg:text-md text-sm'>Available</span>
                 </div>
                 <div className='border-2 border-gray-400 px-6 py-2 flex items-center gap-3 shadow-gray-500 shadow-md rounded-md cursor-pointer'>
-                    <div className='rounded-full bg-gray-500 w-6 h-6'></div>
-                    <span className='text-gray-300'>Occupied</span>
+                    <div className='rounded-full bg-gray-500 lg:w-6 lg:h-6 w-4 h-4'></div>
+                    <span className='text-gray-300 lg:text-md text-sm'>Occupied</span>
                 </div>
             </div>
-            <button
-                className='w-1/3 mt-12 px-6 py-2 font-semibold rounded-md bg-yellow-300 text-center hover:opacity-85'
-                onClick={() => navigate('/payment', 
-                    { state: { 
-                        selectedSeats: selectedSeatLabels, 
-                        movie, 
-                        selectedDate, 
-                        selectedHallType, 
-                        selectedShowTime, 
-                        showtime
-                    }})}
-            >
-                Proceed
-            </button>
+            <div className='flex w-full justify-center gap-2'>
+                <button
+                    className='lg:w-1/5 w-1/4 mt-12 px-6 py-2 font-semibold rounded-md bg-yellow-300 text-center hover:bg-yellow-200'
+                    onClick={() => navigate('/')}
+                >
+                    Back
+                </button>
+                <button
+                    className='lg:w-1/5 w-1/4 mt-12 px-6 py-2 font-semibold rounded-md bg-yellow-300 text-center hover:bg-yellow-200'
+                    onClick={() => navigate('/payment', 
+                        { state: { 
+                            selectedSeats: selectedSeatLabels, 
+                            movie, 
+                            selectedDate, 
+                            selectedHallType, 
+                            selectedShowTime, 
+                            showtime
+                        }})}
+                >
+                    Proceed
+                </button>
+            </div>
+            
         </div>
     );
 };
