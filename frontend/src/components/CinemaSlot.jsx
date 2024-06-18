@@ -2,7 +2,6 @@ import React from 'react';
 import TimeSlot from './TimeSlot';
 
 const CinemaSlot = ({ cinema, times, state, selectedShowTime, onSelectShowTime }) => {
-    console.log(times)
     return (
         <div className='flex flex-col border-b-[1px] border-gray-500 pb-8'>
             <h2 className='text-yellow-300 text-lg mb-4'>

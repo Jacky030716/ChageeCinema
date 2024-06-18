@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useFetch } from '../script/useFetch';
 
 const MovieSeats = () => {
     const [seats, setSeats] = useState(Array(50).fill('available'));
@@ -8,12 +9,33 @@ const MovieSeats = () => {
 
     const { movie, selectedDate, selectedHallType, selectedShowTime, showtime } = location.state;
 
+    // Fetch seat status
+    const { data: seatData, error } = useFetch(`http://localhost/Chagee%20Cinema/backend/fetchSeatStatus.php?showID=${showtime.showID}`);
+
+    // Update seats state based on fetched data
+    useEffect(() => {
+        if (seatData && seatData.length > 0) {
+            const updatedSeats = [...seats];
+            seatData.forEach(seat => {
+                const seatNumbers = seat.seatNumber.split(', ');
+                seatNumbers.forEach(seatNumber => {
+                    const row = seatNumber.charCodeAt(0) - 65; // Convert row letter to index (A -> 0, B -> 1)
+                    const col = parseInt(seatNumber.slice(1)) - 1; // Get column number (1-based to 0-based) (5 -> 4)
+                    const seatIndex = row * 10 + col;
+                    updatedSeats[seatIndex] = 'occupied';
+                });
+            });
+            setSeats(updatedSeats);
+        }
+    }, [seatData]);
+
     const toggleSeat = (index) => {
         setSeats(
             seats.map((seat, i) => (i === index ? (seat === 'selected' ? 'available' : 'selected') : seat))
         );
     };
 
+    // Function to render the seats
     const renderSeats = (start, end, rowLabel) => (
         <div className='flex gap-2 justify-center'>
             {seats.slice(start, end).map((seat, index) => (
@@ -26,7 +48,8 @@ const MovieSeats = () => {
                             ? 'bg-yellow-300'
                             : 'bg-gray-500'
                     }`}
-                    onClick={() => toggleSeat(index + start)}
+                    onClick={() => (seat === 'available' || seat === 'selected') && toggleSeat(index + start)}
+                    disabled={seat === 'occupied'} // disable occupied seats
                 >
                     {rowLabel}{(start + index) % 10 + 1}
                 </button>
