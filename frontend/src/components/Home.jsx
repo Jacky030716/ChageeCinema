@@ -46,7 +46,7 @@ const Home = () => {
             <div className='bg-zinc-800 py-8 px-12'>
                 {/* Select Date Based on selected movie */}
                 <h2 className='text-white text-2xl font-semibold mb-4'>Select Date</h2>
-                <div className='flex gap-6'>
+                <div className='flex flex-wrap gap-6'>
                     {movieShowTimes.find(movie => (movie.movieID - 1) === activeIndex) === undefined && <p className='text-gray-500'>No showtimes available :(</p>}
 
                     {movieShowTimes.reduce((unique, movie) => {
@@ -95,7 +95,7 @@ const Home = () => {
             {/* Select Cinema Location */}
             <div className='bg-black py-8 px-12'>
                 <h2 className='text-white text-2xl font-semibold mb-8'>Select Cinema & Times</h2>
-                <div className='flex flex-col gap-8'>
+                <div className='flex flex-col flex-wrap gap-8'>
                     {Object.keys(groupedShowtimes).length === 0 && <p className='text-gray-500'>No showtimes available :(</p>}
 
                     {Object.entries(groupedShowtimes).map(([locationName, { state, times }], index) => (

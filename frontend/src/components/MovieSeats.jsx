@@ -67,6 +67,8 @@ const MovieSeats = () => {
     const selectedSeatLabels = seats
         .map((seat, index) => (seat === 'selected' ? getSeatLabel(index) : null))
         .filter(seat => seat !== null);
+    
+    console.log(selectedSeatLabels);
 
     return (
         <div className="flex flex-col items-center w-full bg-black min-h-screen">
@@ -82,7 +84,7 @@ const MovieSeats = () => {
                     ))}
                 </div>
             </div>
-            {selectedSeatLabels.length > 0 && (
+            {selectedSeatLabels.length > 0 ? (
                 <div className="flex flex-col items-center gap-4 mt-4">
                     <h2 className="text-white text-xl leading-none">Selected Seats</h2>
                     <div className="flex gap-4 bg-slate-300 px-4 py-2 rounded-md">
@@ -91,6 +93,14 @@ const MovieSeats = () => {
                         ))}
                     </div>
                 </div>
+            ) : (
+                <div className="flex flex-col items-center gap-4 mt-4">
+                    <h2 className="text-white text-xl leading-none">Selected Seats</h2>
+                    <div className="flex gap-4 bg-slate-300 px-4 py-2 rounded-md">
+                        <span className="text-black font-bold">No seats selected</span>
+                    </div>
+                </div>
+            
             )}
             <div className='flex items-center justify-center gap-6 mt-8 w-1/2'>
                 <div className='border-2 border-gray-400 px-6 py-2 flex items-center gap-3 shadow-gray-500 shadow-md rounded-md cursor-pointer'>
@@ -124,6 +134,7 @@ const MovieSeats = () => {
                             selectedShowTime, 
                             showtime
                         }})}
+                    disabled={selectedSeatLabels.length === 0}
                 >
                     Proceed
                 </button>

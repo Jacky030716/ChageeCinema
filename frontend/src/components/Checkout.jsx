@@ -40,9 +40,10 @@ const Checkout = () => {
     // Calculate total price
     const totalPrice = (adultTickets * adultPrice) + (childrenTickets * childrenPrice) + (studentTickets * studentPrice);
 
+    const totalTickets = adultTickets + childrenTickets + studentTickets;
+
     // Check if the total tickets exceed the selected seats
     useEffect(() => {
-        const totalTickets = adultTickets + childrenTickets + studentTickets;
         if (totalTickets > selectedSeats.length) {
             alert('You have selected more tickets than seats');
             setAdultTickets(0);
@@ -143,6 +144,7 @@ const Checkout = () => {
                                 }
                             }
                         )}
+                        disabled={totalTickets !== selectedSeats.length}
                     >
                         Proceed to Payment
                     </button>

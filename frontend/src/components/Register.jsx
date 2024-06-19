@@ -238,14 +238,14 @@ return (
                     {/* Gender */}
                     <div className="mb-6">
                         <label className="text-gray-500" htmlFor="gender">Gender</label><br />
-                        <div className="flex w-2/4 justify-between mt-2">
+                        <div className="flex md:min-w-2/4 w-3/4 justify-between mt-2">
                             <div className="flex items-center justify-center">
                                 <input type="radio" id="male" name="gender" value="male" className="h-4 w-4 checked:bg-yellow-300"/>
-                                <label htmlFor="male" className="text-white text-lg ml-2">Male</label>
+                                <label htmlFor="male" className="text-white lg:text-lg text-md ml-2">Male</label>
                             </div>
                             <div className="flex items-center justify-center">
                                 <input type="radio" id="female" name="gender" value="female" className="h-4 w-4 checked:bg-yellow-300"/>
-                                <label htmlFor="female" className="text-white text-lg ml-2">Female</label>
+                                <label htmlFor="female" className="text-white lg:text-lg text-md ml-2">Female</label>
                             </div>
                         </div>
                     </div>
