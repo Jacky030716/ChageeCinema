@@ -20,7 +20,7 @@ const Home = () => {
 
     if (movieShowTimesError || movieError) {
         return <div>Error loading data: {movieShowTimesError || movieError}</div>;
-    }
+    }   
 
     if (!movieShowTimes || !movie) {
         return <LoadingSpinner />;
