@@ -89,7 +89,7 @@ export default function MovieSwiper({ activeIndex, setActive }) {
             >
               <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movietiTle} className={`${activeIndex === index ? 'border-2 border-yellow-300' : ''} object-cover xl:h-[405px] xl:min-w-[300px] lg:min-w-[260px] w-[360px] h-[400px] rounded-md`} />
               <div className={`flex flex-col justify-center items-center mt-2 ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}>
-                <h3 className='text-white text-center font-semibold text-xs'>{movie.movieTitle}</h3>
+                <h3 className='text-white text-center font-semibold text-xs'>{movie.movieTitle.toUpperCase()}</h3>
                 <span className='text-white text-sm'>{movie.duration} | {movie.language}</span>
               </div>
             </div>

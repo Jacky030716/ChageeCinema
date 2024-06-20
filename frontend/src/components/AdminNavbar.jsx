@@ -58,7 +58,7 @@ const AdminNavbar = () => {
                 <div className='md:flex hidden items-center'>
                     {admin ? 
                     <>
-                    <a href="/profile" className='flex items-center gap-4'>
+                    <a href="/admin/index" className='flex items-center gap-4'>
                         <img src={Profile} alt="Profile Picture" className='h-8 w-8'/>
                         <span className='text-white'>{admin.adminUsername}</span>
                     </a> 

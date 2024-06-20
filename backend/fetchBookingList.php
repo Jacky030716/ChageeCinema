@@ -2,20 +2,14 @@
     // Create connection to the database
     require_once('./config.php');
 
-    $userID = $_GET['userID'];
-
     // Prepare SQL statement
     $sql = "
     SELECT 
         l.locationName,
         h.hallID,
         m.movieTitle,
-        m.moviePoster,
-        mr.showtimeDate,
-        mr.showtime,
-        b.seatNumber,
-        b.totalPrice,
-        b.bookingID
+        b.createdAt,
+        u.name
     FROM 
         booking b
     JOIN 
@@ -26,15 +20,11 @@
         movie m ON b.movieID = m.movieID
     JOIN
         user u ON b.userID = u.userID
-    JOIN
-        movierelease mr ON b.showID = mr.showID
-    WHERE
-        u.userID = ?";
+    ORDER BY
+        b.createdAt DESC
+    ";
 
     $stmt = $conn->prepare($sql);
-
-    // Bind parameters
-    $stmt->bind_param('i', $userID);
 
     // Execute statement
     $stmt->execute();
@@ -44,13 +34,6 @@
 
     // Fetch result as associative array
     $data = $result->fetch_all(MYSQLI_ASSOC);
-
-    // Encode image data in base64 format
-    foreach ($data as $key => $value) {
-        if (isset($value['moviePoster'])) {
-            $data[$key]['moviePoster'] = base64_encode($value['moviePoster']);
-        }
-    }
 
     // Close statement and connection
     $stmt->close();

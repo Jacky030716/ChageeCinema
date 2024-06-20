@@ -84,7 +84,7 @@ const Navbar = () => {
                 className='md:hidden text-white'
                 onClick={() => setMenuOpen(!menuOpen)}
             >
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     menu
                 </span>
             </button>
@@ -102,7 +102,7 @@ const Navbar = () => {
                                     className='bg-white px-4 py-1 text-red-500 rounded-md shadow flex items-center gap-2'
                                     onClick={handleLogout}
                                 >
-                                    <span class="material-symbols-outlined">logout</span>
+                                    <span className="material-symbols-outlined">logout</span>
                                     Logout
                                 </button>
                             </>

@@ -92,7 +92,7 @@ const MyProfile = () => {
 
                 {/* Tickets List */}
                 {location.pathname === '/profile/mytickets' && (
-                    <TicketList tickets={tickets} />
+                    <TicketList tickets={tickets} userData={userData} />
                 )}
 
                 {/* Edit Profile */}
