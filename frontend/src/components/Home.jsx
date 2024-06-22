@@ -14,19 +14,23 @@ const Home = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedHallType, setSelectedHallType] = useState('');
     const [selectedShowTime, setSelectedShowTime] = useState('');
-    
-    const { data: movie, error: movieError } = useFetch('http://localhost/Chagee%20Cinema/backend/fetchMovieData.php');
+
+    const { data: movies, error: movieError } = useFetch('http://localhost/Chagee%20Cinema/backend/fetchMovieData.php');
     const { data: movieShowTimes, error: movieShowTimesError } = useFetch('http://localhost/Chagee%20Cinema/backend/fetchMovieShowTime.php');
 
     if (movieShowTimesError || movieError) {
         return <div>Error loading data: {movieShowTimesError || movieError}</div>;
-    }   
+    }
 
-    if (!movieShowTimes || !movie) {
+    if (!movieShowTimes || !movies) {
         return <LoadingSpinner />;
     }
 
-    const groupedShowtimes = groupShowtimesByLocation(movieShowTimes, selectedDate, selectedHallType, activeIndex);
+    // Extract the movieID of the active movie
+    const activeMovie = movies[activeIndex];
+    const activeMovieID = activeMovie ? activeMovie.movieID : null;
+
+    const groupedShowtimes = groupShowtimesByLocation(movieShowTimes, selectedDate, selectedHallType, activeMovieID);
 
     const handleSelectShowTime = (time) => {
         setSelectedShowTime(time);
@@ -42,15 +46,15 @@ const Home = () => {
                 <PosterCarousel activeIndex={activeIndex} setActive={setActiveIndex} />
             </div>
 
-            {/* Select Date, Hall Type, Cinema Location based on matching activeindex and movieID */}
+            {/* Select Date, Hall Type, Cinema Location based on matching activeIndex and movieID */}
             <div className='bg-zinc-800 py-8 px-12'>
                 {/* Select Date Based on selected movie */}
                 <h2 className='text-white text-2xl font-semibold mb-4'>Select Date</h2>
                 <div className='flex flex-wrap gap-6'>
-                    {movieShowTimes.find(movie => (movie.movieID - 1) === activeIndex) === undefined && <p className='text-gray-500'>No showtimes available :(</p>}
+                    {activeMovieID && movieShowTimes.find(movie => movie.movieID === activeMovieID) === undefined && <p className='text-gray-500'>No showtimes available :(</p>}
 
-                    {movieShowTimes.reduce((unique, movie) => {
-                        if ((movie.movieID - 1) !== activeIndex) {
+                    {activeMovieID && movieShowTimes.reduce((unique, movie) => {
+                        if (movie.movieID !== activeMovieID) {
                             return unique;
                         }
                         return unique.includes(movie.showtimeDate) ? unique : [...unique, movie.showtimeDate];
@@ -65,24 +69,17 @@ const Home = () => {
                 <h2 className='text-white text-2xl font-semibold mb-4 mt-8'>Select Hall Type</h2>
                 <div className='flex gap-6'>
                     {/* No movies */}
-                    {movieShowTimes.find(movie => (movie.movieID - 1) === activeIndex) === undefined && <p className='text-gray-500'>No showtimes available :(</p>}
+                    {activeMovieID && movieShowTimes.find(movie => movie.movieID === activeMovieID) === undefined && <p className='text-gray-500'>No showtimes available :(</p>}
 
                     {/* Render the hall type based on the movie selected */}
-                    {movieShowTimes.reduce((unique, movie) => {
-                        // If the movie ID does not match the active index, return the current unique array
-                        if ((movie.movieID - 1) !== activeIndex) {
+                    {activeMovieID && movieShowTimes.reduce((unique, movie) => {
+                        if (movie.movieID !== activeMovieID) {
                             return unique;
                         }
-
-                        // If the hall type is already in the unique array, return the current unique array
-                        // Otherwise, return a new array with the current hall type added
                         return unique.includes(movie.hallType) ? unique : [...unique, movie.hallType];
                     }, []).map((hallType, index) => {
-                        // Count the number of shows for the current hall type
-                        const showCount = movieShowTimes.filter(movie => (movie.movieID - 1) === activeIndex && movie.showtimeDate === selectedDate && movie.hallType === hallType).length;
+                        const showCount = movieShowTimes.filter(movie => movie.movieID === activeMovieID && movie.showtimeDate === selectedDate && movie.hallType === hallType).length;
 
-                        // If there is at least one show for the current hall type, render the HallBox
-                        // Otherwise, render nothing
                         return showCount >= 1 ? (
                             <div key={index} onClick={() => setSelectedHallType(hallType)}>
                                 <HallBox type={hallType} selected={selectedHallType} />
@@ -114,8 +111,8 @@ const Home = () => {
 
             {selectedDate && selectedHallType && Object.keys(selectedShowTime).length > 0 &&
                 <MovieModalBox 
-                    movie={movie.find(movie => (movie.movieID - 1) === activeIndex)}
-                    showtime={movieShowTimes.find(movie => (movie.movieID - 1) === activeIndex && movie.showtimeDate === selectedDate && movie.hallType === selectedHallType)}
+                    movie={activeMovie}
+                    showtime={movieShowTimes.find(movie => movie.movieID === activeMovieID && movie.showtimeDate === selectedDate && movie.hallType === selectedHallType)}
                     selectedDate={selectedDate}
                     selectedHallType={selectedHallType}
                     selectedShowTime={selectedShowTime}

@@ -2,7 +2,7 @@ export const groupShowtimesByLocation = (showtimes, selectedDate, selectedHallTy
     const grouped = {};
 
     showtimes.forEach((movie) => {
-        if ((movie.movieID - 1) === activeIndex && movie.showtimeDate === selectedDate && movie.hallType === selectedHallType) {
+        if ((movie.movieID) === activeIndex && movie.showtimeDate === selectedDate && movie.hallType === selectedHallType) {
             if (!grouped[movie.locationName]) {
                 grouped[movie.locationName] = {
                     state: movie.state,

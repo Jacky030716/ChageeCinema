@@ -90,13 +90,13 @@ const AdminAddMovie = () => {
     };
 
     return (
-        <div className="w-full h-fit mt-10 bg-black p-8 rounded-md shadow shadow-slate-400 animate-fade-in">
+        <div className="w-full h-fit mt-24 bg-black p-8 rounded-md shadow shadow-slate-400 animate-fade-in">
             <h2 className="text-white text-xl font-semibold mb-6">Add New Movie</h2>
             <form onSubmit={handleSubmit}>
-                <div className="flex w-full gap-4 justify-around">
+                <div className="sm:flex w-full gap-4 justify-around">
                     {/* Movie Poster */}
-                    <div className="p-8 border-none bg-zinc-800 flex flex-col items-center w-1/4 rounded-md">
-                        <p className="text-white text-xl font-bold" htmlFor="moviePoster">
+                    <div className="lg:p-8 px-4 py-8 border-none bg-zinc-800 flex flex-col items-center sm:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
+                        <p className="text-white text-md font-bold text-center" htmlFor="moviePoster">
                             Upload Movie Poster
                         </p>
                         <br />
@@ -115,14 +115,14 @@ const AdminAddMovie = () => {
                         />
                         <label
                             htmlFor="moviePoster"
-                            className="w-1/2 font-semibold text-black cursor-pointer border-none p-2 mt-4 bg-yellow-300 rounded-lg hover:bg-yellow-200"
+                            className="lg:w-3/4 w-full font-semibold text-black cursor-pointer border-none p-2 mt-4 bg-yellow-300 rounded-lg hover:bg-yellow-200"
                         >
-                            <span className="w-full text-center flex justify-center">Choose File</span>
+                            <span className="w-full text-center flex justify-center lg:text-md text-sm">Choose File</span>
                         </label>
                     </div>
 
                     <div className="p-8 bg-zinc-800 bg-opacity flex-1 rounded-md">
-                        <h2 className="text-xl text-white font-semibold mb-6">Enter Movie Details</h2>
+                        <h2 className="text-md text-white font-semibold mb-6">Enter Movie Details</h2>
 
                         {/* Movie Title */}
                         <div className="mb-6">
@@ -140,7 +140,7 @@ const AdminAddMovie = () => {
                         </div>
 
                         {/* Movie Duration */}
-                        <div className="mb-6">
+                        <div className="mb-6 md:block flex-col">
                             <label htmlFor="duration" className="text-gray-500">
                                 Enter Movie Duration
                             </label>

@@ -19,7 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $movieTitle = sanitize($_POST['movieTitle'], $conn);
     $duration = sanitize($_POST['duration'], $conn);
     $language = sanitize($_POST['language'], $conn);
-    $moviePoster = $_POST['moviePoster']; 
+    $moviePoster = $_POST['moviePoster'];
+
+    // Format the language format (first char uppercase, rest lowercase)
+    $language = ucfirst(strtolower($language));
 
     // Decode base64 poster data
     $decodedPoster = base64_decode($moviePoster);

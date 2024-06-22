@@ -170,7 +170,8 @@ const EditProfile = ({ userData }) => {
                             <Calendar 
                                 className="bg-white w-3/5 text-black rounded-lg p-4 flex flex-col items-center justify-center max-w-max absolute right-0 bottom-10" 
                                 onChange={handleCalendarChange} 
-                                value={formData.dob} 
+                                value={formData.dob}
+                                maxDate={new Date()}
                             />
                         </div>
                         }

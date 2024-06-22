@@ -1,6 +1,6 @@
 // formValidations.js
 export const validateNumber = (number) => {
-    const mobileRegex = /^[0-9]{10,11}$/;
+    const mobileRegex = /^01\d\d{3,4}\d{4}$/;
     return mobileRegex.test(number);
   };
   
@@ -17,4 +17,17 @@ export const validateNumber = (number) => {
   export const formatDate = (date) => {
     const d = new Date(date);
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  };
+
+  export const formatDateYMD = (date) => {
+    const d = new Date(date);
+
+    if (d.getMonth() + 1 < 10) {
+      return `${d.getFullYear()}/0${d.getMonth() + 1}/${d.getDate()}`;
+    }else if (d.getDate() < 10) {
+      return `${d.getFullYear()}/${d.getMonth() + 1}/0${d.getDate()}`;
+    }else{
+      return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+    }
+
   };

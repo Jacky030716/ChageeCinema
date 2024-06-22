@@ -10,12 +10,26 @@ const Login = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [error, setError] = useState("");
 
+    // Hidden way for the admin to login
+    const adminLogin = () => {
+        let clickCount = 0;
+        return () => {
+            setTimeout(() => {
+                clickCount = 0;
+            }, 3000)
+            clickCount++;
+            if(clickCount === 5){
+                window.location.href = "/admin/login";
+            }
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch("http://localhost/Chagee%20Cinema/backend/login.php", {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "application/x-www-form-urlencoded", // return type
             },
             body: new URLSearchParams({
                 contactNum,
@@ -47,7 +61,10 @@ const Login = () => {
         <div className="flex">
             <div className="px-8 py-2 bg-black h-screen md:w-[50%] w-full">
                 <div className="flex justify-start items-center">
-                    <img className="w-36 h-36" src={Logo} alt="Logo" />
+                    <img 
+                        className="w-36 h-36" src={Logo} alt="Logo" 
+                        onClick={adminLogin()}
+                    />
                     <span className="text-white font-bold italic font-mono md:text-xl lg:block hidden">
                         Chagee Cinema
                     </span>

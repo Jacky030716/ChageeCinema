@@ -67,7 +67,7 @@ const AdminBookingList = () => {
 
   return (
     <>
-      <div className="relative overflow-y-auto shadow-md sm:rounded-lg py-12 px-8 max-w-full bg-black">
+      <div className="relative h-full overflow-y-auto shadow-md sm:rounded-lg py-12 px-8 mt-24 max-w-full bg-black">
         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <SortingMenu sortMenu={sortMenu} setSortMenu={setSortMenu} handleSort={handleSort}/>
           <label htmlFor="table-search" className="sr-only">
@@ -118,10 +118,10 @@ const AdminBookingList = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="overflow-y-auto">
             {sortedBookings().map((booking, index) => (
               <tr
-                key={booking.id}
+                key={index}
                 className="bg-white border-b dark:bg-zinc-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-600"
               >
                 <td className="px-6 py-4">{index + 1}</td>

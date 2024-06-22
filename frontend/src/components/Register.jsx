@@ -226,7 +226,12 @@ return (
                             < IoCalendarNumber className="text-gray-400 cursor-pointer absolute right-2 top-2.5" onClick={() => setIsDate(!isDate)} />
                             {isDate ? 
                             <div ref={calendarRef}>
-                                <Calendar className="bg-white w-3/5 text-black rounded-lg p-4 flex flex-col items-center justify-center max-w-max absolute right-0 bottom-10" onChange={setValue} value={value} />
+                                <Calendar 
+                                    className="bg-white w-3/5 text-black rounded-lg p-4 flex flex-col items-center justify-center max-w-max absolute right-0 bottom-10" 
+                                    onChange={setValue} 
+                                    value={value} 
+                                    maxDate={new Date()}
+                                />
                             </div>
                                 : ""
                             }

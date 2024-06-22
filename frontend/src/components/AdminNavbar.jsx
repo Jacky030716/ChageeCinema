@@ -37,7 +37,7 @@ const AdminNavbar = () => {
     };
 
     return (
-        <nav className="bg-zinc-800 flex items-center justify-between h-[80px] p-8 w-full z-10 shadow-sm shadow-gray-500">
+        <nav className="fixed bg-zinc-800 flex items-center justify-between h-[80px] p-8 w-full z-10 shadow-sm shadow-gray-500">
             {/* Logo */}
             <a href="/admin/index" className='flex items-center'>
                 <img src={Logo} alt="Cinema Logo" className='w-32 h-32'/>
@@ -45,17 +45,18 @@ const AdminNavbar = () => {
             </a>
 
             {/* Quick Links */}
-            <div className='md:flex hidden'>
-                <ul className='flex items-center gap-8 text-white'>
+            <div className='lg:flex hidden'>
+                <ul className='flex items-center gap-8 text-white md:text-sm'>
                     <li className='nav-item hover:text-yellow-300 cursor-pointer'><a href="/admin/index/addMovie">Add New Movie</a></li>
                     <li className='nav-item hover:text-yellow-300 cursor-pointer'><a href="/admin/index/viewBooking">View Booking</a></li>
+                    <li className='nav-item hover:text-yellow-300 cursor-pointer'><a href="/admin/index/editMovie">Edit Movie</a></li>
                 </ul>
             </div>
 
             {/* Profile Account */}
             
             <div className='flex items-center gap-4'>
-                <div className='md:flex hidden items-center'>
+                <div className='lg:flex hidden items-center'>
                     {admin ? 
                     <>
                     <a href="/admin/index" className='flex items-center gap-4'>
@@ -81,7 +82,7 @@ const AdminNavbar = () => {
             </div>
 
             <button 
-                className='md:hidden text-white'
+                className='lg:hidden text-white'
                 onClick={() => setMenuOpen(!menuOpen)}
             >
                 <span className="material-symbols-outlined">
@@ -92,17 +93,18 @@ const AdminNavbar = () => {
             {/* Hamburger menu */}
             {
                 menuOpen && 
-                <div className='md:hidden fixed w-full top-20 right-0 bg-zinc-900 px-12 py-6 rounded-lg z-10 shadow-md shadow-white'>
+                <div className='lg:hidden fixed w-full top-20 right-0 bg-zinc-900 px-12 py-6 rounded-lg z-10 shadow-md shadow-white'>
                     <ul className='flex flex-col items-center gap-8 text-white'>
-                        <li className='nav-item hover:text-yellow-300 cursor-pointer'><a href="/admin/index/addMovie">Showtime by Movies</a></li>
-                        <li className='nav-item hover:text-yellow-300 cursor-pointer'><a href="/profile">My Profile</a></li>
-                        {user ? 
+                        <li className='hover:text-yellow-300 cursor-pointer'><a href="/admin/index/addMovie">Add New Movie</a></li>
+                        <li className='hover:text-yellow-300 cursor-pointer'><a href="/admin/index/viewBooking">View Booking</a></li>
+                        <li className='hover:text-yellow-300 cursor-pointer'><a href="/admin/index/editMovie">Edit Movie</a></li>
+                        {admin ? 
                             <>
                                 <button 
                                     className='bg-white px-4 py-1 text-red-500 rounded-md shadow flex items-center gap-2'
                                     onClick={handleLogout}
                                 >
-                                    <span class="material-symbols-outlined">logout</span>
+                                    <span className="material-symbols-outlined">logout</span>
                                     Logout
                                 </button>
                             </>
