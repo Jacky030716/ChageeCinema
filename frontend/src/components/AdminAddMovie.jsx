@@ -121,12 +121,12 @@ const AdminAddMovie = () => {
                         </label>
                     </div>
 
-                    <div className="p-8 bg-zinc-800 bg-opacity flex-1 rounded-md">
-                        <h2 className="text-md text-white font-semibold mb-6">Enter Movie Details</h2>
+                    <div className="sm:p-8 p-4 bg-zinc-800 bg-opacity flex-1 rounded-md">
+                        <h2 className="sm:text-md text-sm text-white font-semibold mb-6">Enter Movie Details</h2>
 
                         {/* Movie Title */}
                         <div className="mb-6">
-                            <label htmlFor="movieTitle" className="text-gray-500">
+                            <label htmlFor="movieTitle" className="text-gray-500 sm:text-md text-sm">
                                 Enter Movie Title
                             </label>
                             <br />
@@ -141,7 +141,7 @@ const AdminAddMovie = () => {
 
                         {/* Movie Duration */}
                         <div className="mb-6 md:block flex-col">
-                            <label htmlFor="duration" className="text-gray-500">
+                            <label htmlFor="duration" className="text-gray-500 sm:text-md text-sm">
                                 Enter Movie Duration
                             </label>
                             <br />
@@ -171,14 +171,14 @@ const AdminAddMovie = () => {
                                 name="minute"
                                 id="minute"
                                 onChange={handleDurationChange}
-                                className="border-2 border-gray-400 bg-transparent mt-2 rounded-md p-1.5 ml-3 w-fit placeholder:text-sm placeholder:px-1 placeholder:opacity-40 text-white focus:border-yellow-300 outline-none"
+                                className="border-2 border-gray-400 bg-transparent mt-2 rounded-md p-1.5 sm:ml-3 ml-0 sm:w-fit w-[60%]  placeholder:text-sm placeholder:px-1 placeholder:opacity-40 text-white focus:border-yellow-300 outline-none"
                             />
                             <span className="text-white ml-2">mins</span>
                         </div>
 
                         {/* Movie Language */}
                         <div className="mb-6">
-                            <label htmlFor="language" className="text-gray-500">
+                            <label htmlFor="language" className="text-gray-500 sm:text-md text-sm">
                                 Enter Movie Language
                             </label>
                             <br />

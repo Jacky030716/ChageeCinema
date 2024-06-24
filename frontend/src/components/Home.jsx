@@ -37,7 +37,7 @@ const Home = () => {
     };
 
     return (
-        <div className='h-full w-auto bg-black'>
+        <div className='min-h-screen w-auto bg-black'>
             {/* Navbar Section */}
             <Navbar />
 

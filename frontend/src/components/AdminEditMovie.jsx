@@ -48,7 +48,7 @@ const AdminEditMovie = () => {
     }
 
     return (
-        <div className="min-h-screen border border-gray-700 mt-24">
+        <div className="min-h-screen md:min-w-min border border-gray-700 mt-24 overflow-auto">
             {isEditing && <EditMovieForm movie={currentMovie} />}
             <table className={`${isEditing ? 'opacity-30' : 'opacity-100'} w-full h-full text-sm text-left text-gray-400`}>
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-400">

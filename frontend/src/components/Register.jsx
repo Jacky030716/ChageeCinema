@@ -60,6 +60,8 @@ const handleSubmit = async (e) => {
                 setModalIsOpen(false);
                 window.location.href = "/login"; 
             }, 2000);
+        }else if(data.includes("Contact number has been registered before")){
+            alert("Contact number has been registered before");
         }
     } catch (error) {
         console.error("Error occurred:", error);

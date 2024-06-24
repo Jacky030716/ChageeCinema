@@ -22,9 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $showtimeDate = $conn->real_escape_string($json_data['showtimeDate']);
     $showtime = $conn->real_escape_string($json_data['showtime']);
 
-    // Debugging: Print the received data
-    error_log("Received data: movieID=$movieID, hallID=$hallID, locationID=$locationID, showtimeDate=$showtimeDate, showtime=$showtime");
-
     // Prepare and bind
     $stmt = $conn->prepare("INSERT INTO movierelease (showID, hallID, locationID, showtimeDate, showtime, movieID) VALUES (UUID(), ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssi", $hallID, $locationID, $showtimeDate, $showtime, $movieID);

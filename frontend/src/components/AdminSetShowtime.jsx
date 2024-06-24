@@ -7,21 +7,8 @@ import { formatDateYMD } from '../script/formValidation';
 
 const API_BASE_URL = 'http://localhost/Chagee%20Cinema/backend/';
 
-const Input = ({ label, type = "text", value, onChange, ...props }) => (
-    <div className="mb-6">
-        <label className="text-gray-500">{label}</label>
-        <input
-            type={type}
-            value={value}
-            onChange={onChange}
-            className="border-2 border-gray-400 bg-transparent mt-2 rounded-md p-1.5 w-full text-white focus:border-yellow-300 outline-none"
-            {...props}
-        />
-    </div>
-);
-
 const Select = ({ label, options, value, onChange }) => (
-    <div className="mb-6 sm:w-1/2 flex flex-col">
+    <div className="mb-6 xl:w-2/3 w-full flex flex-col">
         <label className="text-gray-500">{label}</label>
         <select
             value={value}
@@ -124,18 +111,18 @@ const AdminSetShowtime = () => {
 
     return (
         <div className="w-3/4 flex flex-col mx-auto h-fit mt-24 bg-black p-8 rounded-md shadow shadow-slate-400 animate-fade-in">
-            <h2 className="text-white sm:text-xl text-sm font-semibold mb-6">Set Movie Showtime</h2>
+            <h2 className="text-white md:text-xl text-sm font-semibold mb-6">Set Movie Showtime</h2>
             <form className='w-full' onSubmit={handleSubmit}>
-                <div className="sm:flex flex-col w-full gap-4 justify-around">
-                    <div className="lg:p-6 px-4 py-6 border-none bg-zinc-800 flex flex-col items-center lg:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
-                        <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movieTitle} className='rounded-md' />
+                <div className="flex xl:flex-row flex-col w-full gap-4 justify-around">
+                    <div className="xl:p-6 px-4 py-6 border-none bg-zinc-800 flex flex-col items-center xl:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
+                        <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movieTitle} className='rounded-md xl:min-w-[80%] w-1/2' />
                         <p className='text-white font-semibold mt-2 text-center sm:text-md text-xs'>{movie.movieTitle}</p>
-                        <p className='text-white sm:text-sm text-xs'>{movie.duration} | {movie.language}</p>
+                        <p className='text-white text-center sm:text-sm text-xs'>{movie.duration} | {movie.language}</p>
                     </div>
 
                     <div className="p-8 bg-zinc-800 bg-opacity flex-1 flex flex-col rounded-md">
-                        <div className='sm:flex gap-8'>
-                            <div className="mb-6 sm:w-1/2">
+                        <div className='sm:flex flex-col'>
+                            <div className="mb-6 xl:w-2/3 w-full">
                                 <label htmlFor="movieDate" className="text-gray-500 sm:text-md text-sm">
                                     Enter Movie Date
                                 </label>
@@ -182,7 +169,7 @@ const AdminSetShowtime = () => {
                             </div>
                         </div>
 
-                        <div className='sm:flex gap-8'>
+                        <div className='sm:flex flex-col flex-wrap gap-2'>
                             <Select
                                 label="Select Location"
                                 options={selections.location.map(loc => ({ value: loc.locationID, label: `${loc.locationName} - ${loc.state}` }))}

@@ -68,12 +68,10 @@ const MovieSeats = () => {
         .map((seat, index) => (seat === 'selected' ? getSeatLabel(index) : null))
         .filter(seat => seat !== null);
     
-    console.log(selectedSeatLabels);
-
     return (
-        <div className="flex flex-col items-center min-w-max min-h-screen bg-black">
+        <div className="flex flex-col items-center min-w-max min-h-[100vh] bg-black">
             <div className="bg-zinc-800 h-[10%] shadow-white shadow-md text-white font-bold py-2 w-full mb-12 text-center flex items-center justify-center text-xl">SCREEN</div>
-            <div className="flex flex-shrink-0 items-center justify-center p-4 bg-black lg:min-w-1/2">
+            <div className="flex items-center justify-center p-4 bg-black">
                 <div className="flex flex-col gap-2 items-center">
                     {[...Array(5)].map((_, rowIndex) => (
                         <div key={rowIndex} className='flex items-center gap-6 w-full'>
@@ -102,7 +100,7 @@ const MovieSeats = () => {
                 </div>
             
             )}
-            <div className='flex sm:flex-row flex-col items-center justify-center gap-6 mt-8 w-1/2'>
+            <div className='flex sm:flex-row items-center justify-center gap-6 mt-8 w-1/2'>
                 <div className='border-2 border-gray-400 px-6 py-2 flex items-center gap-3 shadow-gray-500 shadow-md rounded-md cursor-pointer'>
                     <div className='rounded-full bg-yellow-300 lg:w-6 lg:h-6 w-4 h-4'></div>
                     <span className='text-gray-300 lg:text-md text-sm'>Selected</span>

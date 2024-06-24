@@ -38,13 +38,13 @@ const MovieModalBox = ({ movie, selectedDate, selectedHallType, selectedShowTime
                     <div
                         className="justify-center items-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none shadow-xl"
                     >
-                        <div className="relative my-6 mx-auto max-h-[50%] min-w-[400px]">
+                        <div className="relative my-6 mx-auto max-h-[50%] md:min-w-[400px] min-w-[300px]">
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col max-w-xl bg-black outline-none focus:outline-none"> 
                                 {/*header*/}
                                 <div className="flex items-start justify-between p-6 border-b border-solid border-blueGray-200 rounded-t relative">
                                     <div className='flex flex-col items-center justify-center text-white w-full'>
-                                        <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt="Poster" className='w-1/3 border-2 border-yellow-300 rounded-md absolute left-1/2 translate-x-[-50%] top-[-50%] h-[156px]'/>
+                                        <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt="Poster" className='md:w-1/3 w-1/2 border-2 border-yellow-300 rounded-md absolute left-1/2 translate-x-[-50%] top-[-50%] h-[156px]'/>
                                         <div className='flex flex-col justify-center items-center pt-16 w-full'>
                                             <h2 className='font-semibold mt-2 text-wrap break-words'>{movie.movieTitle}</h2>
                                             <p className='text-sm'><span>{movie.duration}</span> | <span>{movie.language}</span></p>
