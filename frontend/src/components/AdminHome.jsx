@@ -45,7 +45,7 @@ const AdminHome = () => {
 
             {/* Add Showtime */}
             {location.pathname === '/admin/index/setShowtime' && (
-                <div className='w-full px-12 py-6'>
+                <div className='w-full sm:px-12 py-6'>
                     <AdminSetShowtime />
                 </div>
             )}

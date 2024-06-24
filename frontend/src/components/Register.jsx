@@ -131,7 +131,7 @@ return (
         <div className="px-16 py-2 bg-black md:w-[50%] w-full">
             <div className="flex justify-start items-center">
                 <img className="w-36 h-36" src={Logo} alt="Logo" />
-                <span className="text-white font-bold italic font-mono md:text-xl lg:block hidden">Cinema Booking System</span>
+                <span className="text-white font-bold italic font-mono md:text-xl lg:block hidden">Chagee Cinema</span>
             </div>
 
             {/* Register Form */}
@@ -283,7 +283,7 @@ return (
 
         {/* Image */}
         <div className="h-screen w-[65%] md:block hidden bg-slate-900 overflow-hidden bg-blend-overlay">
-            <img src={CinemaSeat} alt="Cinema Background" />
+            <img src={CinemaSeat} alt="Cinema Background" className="w-full h-full object-cover object-center"/>
         </div>
     </div>
     )

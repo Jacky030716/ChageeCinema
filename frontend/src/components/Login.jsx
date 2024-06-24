@@ -110,7 +110,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="h-screen w-[65%] md:block hidden bg-slate-900 overflow-hidden bg-blend-overlay">
-                <img src={CinemaSeat} alt="Cinema Seat Picture" />
+                <img src={CinemaSeat} alt="Cinema Seat Picture" className="object-cover object-center w-full h-full"/>
             </div>
 
             {modalIsOpen && (

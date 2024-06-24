@@ -35,9 +35,9 @@ const TicketList = ({ tickets, userData }) => {
         <div className='lg:w-3/6 w-full h-fit bg-black p-4 rounded-md shadow shadow-slate-400 animate-fade-in'>
             <h1 className="text-white font-bold text-lg ml-4">Ticket List</h1>
             {tickets.length > 0 ? tickets.map((ticket, index) => (
-                <div key={index} className='flex gap-4 px-4 py-4 border-b-[1px] border-b-gray-500'>
+                <div key={index} className='flex sm:flex-row flex-col items-center gap-4 px-4 py-4 border-b-[1px] border-b-gray-500'>
                     <img src={`data:image/jpeg;base64,${ticket.moviePoster}`} alt={ticket.movieTitle} className='w-24 h-30 rounded-md' />
-                    <div className='flex flex-col w-full'>
+                    <div className='flex flex-col w-full sm:text-left text-center'>
                         <h2 className='text-white'>{ticket.movieTitle} <span className='text-yellow-300 text-sm ml-2'>{ticket.locationName}</span></h2>
                         <p className='text-gray-400 text-sm'>{getFullShowTime(ticket.showtimeDate)} | {formatTime(ticket.showtime)} | {ticket.hallID}</p>
                         <p className='text-gray-500 text-sm'>Seat Number: {ticket.seatNumber}</p>

@@ -84,19 +84,19 @@ const Payment = () => {
     return (
         <>
             <Navbar userdata={userData}/>
-            <div className="flex flex-col gap-8 w-full bg-black h-screen px-12 py-28">
-                <div className="flex gap-8">
+            <div className="flex flex-col gap-8 w-full bg-black min-h-screen px-12 py-28">
+                <div className="flex sm:flex-row flex-col sm:items-start items-center gap-8">
                     <div>
                         <img src={`data:image/jpeg;base64,${movie?.moviePoster}`} alt={movie.movieTitle} className="rounded-md border-2 border-yellow-300 min-h-1/2 max-h-[500px]"/>
                     </div>
-                    <div className="w-full h-1/2 ">
+                    <div className="w-full h-1/2">
                         {/* Movie Booking Details */}
                         <div className="w-full flex flex-col gap-4 border-b-[1px] pb-8 border-b-gray-500">
-                            <div className="mb-4">
+                            <div className="mb-4 sm:text-left text-center">
                                 <h2 className="text-white text-xl">{movie.movieTitle}</h2>
                                 <p className="text-gray-500 text-sm">{movie.language} | {movie.duration} | {selectedHallType}</p>
                             </div>
-                            <div className="w-full gap-x-4 gap-y-6 flex flex-wrap">
+                            <div className="w-full gap-x-4 gap-y-6 flex flex-wrap sm:justify-start justify-between">
                                 <div className="basis-1/3">
                                     <p className="text-gray-500 text-md">Cinema</p>
                                     <p className="text-white text-md font-semibold">{showtime.state} - {showtime.locationName}</p>
@@ -137,7 +137,7 @@ const Payment = () => {
                 </div>
                 
                 <button 
-                    className="text-black bg-yellow-300 font-semibold w-1/3 mx-auto py-2 rounded-md hover:bg-yellow-200 duration-100 transition-all hover:scale-105"
+                    className="text-black bg-yellow-300 font-semibold sm:w-1/3 w-full mx-auto py-2 rounded-md hover:bg-yellow-200 duration-100 transition-all hover:scale-105"
                     onClick={handlePayment}
                 >
                     Checkout And Pay

@@ -10,7 +10,7 @@ const TicketCounter = ({ label, count, setCount }) => {
 
     return(
     <div className='flex justify-between items-center w-1/3'>
-        <p className='text-white inline'>{label}</p>
+        <p className='text-white inline sm:mr-0 mr-3'>{label}</p>
         <div className='flex items-center gap-3'>
         <button 
             className='text-black bg-yellow-300 rounded-full w-8 h-8 text-center text-xl font-bold flex items-center justify-center'

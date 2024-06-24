@@ -93,9 +93,9 @@ const AdminAddMovie = () => {
         <div className="w-full h-fit mt-24 bg-black p-8 rounded-md shadow shadow-slate-400 animate-fade-in">
             <h2 className="text-white text-xl font-semibold mb-6">Add New Movie</h2>
             <form onSubmit={handleSubmit}>
-                <div className="sm:flex w-full gap-4 justify-around">
+                <div className="md:flex w-full gap-4 justify-around">
                     {/* Movie Poster */}
-                    <div className="lg:p-8 px-4 py-8 border-none bg-zinc-800 flex flex-col items-center sm:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
+                    <div className="lg:p-8 px-4 py-8 border-none bg-zinc-800 flex flex-col items-center md:w-1/4 w-full md:mb-0 mb-2 rounded-md">
                         <p className="text-white text-md font-bold text-center" htmlFor="moviePoster">
                             Upload Movie Poster
                         </p>

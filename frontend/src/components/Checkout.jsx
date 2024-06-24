@@ -70,7 +70,7 @@ const Checkout = () => {
     }
 
     return (
-        <div className='h-screen flex flex-col bg-black'>
+        <div className='min-h-screen min-w-max flex flex-col bg-black'>
             <Navbar />
             {/* Ticket Type */}
             <div className='bg-yellow-400 h-fit flex px-12 pt-24 pb-6 items-center'>
@@ -122,7 +122,7 @@ const Checkout = () => {
             <div className='bg-zinc-900 h-fit px-12 py-6 rounded-t-2xl flex-1'>
                 <h2 className='text-gray-400 text-2xl font-semibold mb-4'>Select Ticket Type</h2>
                 <div className='flex flex-col gap-6 items-center'>
-                    <div className='flex items-center justify-start w-full gap-6'>
+                    <div className='flex sm:flex-row flex-col sm:items-center items-start justify-start w-full gap-6'>
                         <TicketCounter label="Adult" count={adultTickets} setCount={setAdultTickets}/>
                         <TicketCounter label="Children" count={childrenTickets} setCount={setChildrenTickets}/>
                         <TicketCounter label="Student" count={studentTickets} setCount={setStudentTickets}/>

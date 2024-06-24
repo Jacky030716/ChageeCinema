@@ -44,18 +44,16 @@ const EditMovieForm = ({movie}) => {
         }
     };
 
-    console.log(formData.duration)
-
     return (
         <form 
             className='flex justify-center w-full'
             onSubmit={handleSubmit}
         >
-            <div className="fixed sm:flex w-2/3 h-3/4 gap-4 justify-center z-10">
+            <div className="fixed bottom-0 sm:bottom-10 sm:flex lg:flex-row flex-col w-2/3 h-3/4 gap-4 justify-center z-10">
                 {/* Movie Poster */}
-                <div className="lg:p-8 px-4 py-8 border-none bg-zinc-800 flex flex-col items-center justify-center sm:w-2/4 w-full sm:mb-0 mb-2 rounded-md">
+                <div className="lg:p-8 px-4 py-8 border-none bg-zinc-800 flex flex-col items-center justify-center lg:w-2/4 w-full lg:h-full sm:mb-0 mb-2 rounded-md">
                     <p className='text-white font-semibold mb-2 text-lg'>Movie Poster</p>
-                    <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movieTitle} className="w-fit max-h-[90%] rounded-md"/>
+                    <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movieTitle} className="lg:max-w-full max-w-[50%] lg:max-h-[90%] rounded-md"/>
                 </div>
 
                 <div className="p-8 bg-zinc-800 bg-opacity flex-1 rounded-md">

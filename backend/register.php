@@ -28,6 +28,17 @@ if (isset($_POST['name']) && isset($_POST['contactNum']) && isset($_POST['email'
     exit();
 }
 
+// Check if contact number has been registered before
+$checkStmt = $conn->prepare("SELECT contactNum FROM user WHERE contactNum = ?");
+$checkStmt->bind_param("s", $contactNum);
+$checkStmt->execute();
+$checkStmt->store_result();
+
+if ($checkStmt->num_rows > 0) {
+    echo "Contact number has been registered before";
+    exit();
+}
+
 // Hash the password
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 

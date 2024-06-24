@@ -85,7 +85,6 @@ const AdminLogin = () => {
                                     <FaEyeSlash className="absolute top-[40%] right-3 text-gray-400 cursor-pointer" onClick={() => setShowPassword(!showPassword)}/>
                                 }
                             </div>
-                            <a href="#" className="text-yellow-300 text-sm underline mt-2 block text-right">Forgot Password?</a>
                         </div>
                         <button className="w-full text-black font-bold bg-yellow-300 mt-6 mb-10 rounded-md py-2.5">Login</button>
                     </form>

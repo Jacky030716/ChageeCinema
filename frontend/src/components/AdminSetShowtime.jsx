@@ -21,7 +21,7 @@ const Input = ({ label, type = "text", value, onChange, ...props }) => (
 );
 
 const Select = ({ label, options, value, onChange }) => (
-    <div className="mb-6 w-1/2 flex flex-col">
+    <div className="mb-6 sm:w-1/2 flex flex-col">
         <label className="text-gray-500">{label}</label>
         <select
             value={value}
@@ -124,19 +124,19 @@ const AdminSetShowtime = () => {
 
     return (
         <div className="w-3/4 flex flex-col mx-auto h-fit mt-24 bg-black p-8 rounded-md shadow shadow-slate-400 animate-fade-in">
-            <h2 className="text-white text-xl font-semibold mb-6">Set Movie Showtime</h2>
+            <h2 className="text-white sm:text-xl text-sm font-semibold mb-6">Set Movie Showtime</h2>
             <form className='w-full' onSubmit={handleSubmit}>
-                <div className="sm:flex w-full gap-4 justify-around">
-                    <div className="lg:p-6 px-4 py-6 border-none bg-zinc-800 flex flex-col items-center sm:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
+                <div className="sm:flex flex-col w-full gap-4 justify-around">
+                    <div className="lg:p-6 px-4 py-6 border-none bg-zinc-800 flex flex-col items-center lg:w-1/4 w-full sm:mb-0 mb-2 rounded-md">
                         <img src={`data:image/jpeg;base64,${movie.moviePoster}`} alt={movie.movieTitle} className='rounded-md' />
-                        <p className='text-white font-semibold mt-2 text-center'>{movie.movieTitle}</p>
-                        <p className='text-white text-sm'>{movie.duration} | {movie.language}</p>
+                        <p className='text-white font-semibold mt-2 text-center sm:text-md text-xs'>{movie.movieTitle}</p>
+                        <p className='text-white sm:text-sm text-xs'>{movie.duration} | {movie.language}</p>
                     </div>
 
                     <div className="p-8 bg-zinc-800 bg-opacity flex-1 flex flex-col rounded-md">
-                        <div className='flex gap-8'>
-                            <div className="mb-6 w-1/2">
-                                <label htmlFor="movieDate" className="text-gray-500">
+                        <div className='sm:flex gap-8'>
+                            <div className="mb-6 sm:w-1/2">
+                                <label htmlFor="movieDate" className="text-gray-500 sm:text-md text-sm">
                                     Enter Movie Date
                                 </label>
                                 <div className="border-2 border-gray-400 bg-transparent mt-2 h-10 rounded-md p-1.5 w-full relative">
@@ -156,7 +156,7 @@ const AdminSetShowtime = () => {
                             </div>
 
                             <div className="mb-6 flex-col">
-                                <label htmlFor="showtime" className="text-gray-500">
+                                <label htmlFor="showtime" className="text-gray-500 sm:text-md text-sm">
                                     Enter Movie Showtime
                                 </label>
                                 <br />
@@ -182,7 +182,7 @@ const AdminSetShowtime = () => {
                             </div>
                         </div>
 
-                        <div className='flex gap-8'>
+                        <div className='sm:flex gap-8'>
                             <Select
                                 label="Select Location"
                                 options={selections.location.map(loc => ({ value: loc.locationID, label: `${loc.locationName} - ${loc.state}` }))}
